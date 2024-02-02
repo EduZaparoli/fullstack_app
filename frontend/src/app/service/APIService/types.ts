@@ -4,6 +4,10 @@ export interface APIResponse<APIResponse> {
     status: string;
 }
 
+export interface AccessToken {
+    access_token: string
+}
+
 export interface User {
     first_name: string;
     last_name: string;
