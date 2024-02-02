@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
     <>
-      <Container>
+      <Container align='center' justifyContent='center'>
         <LoginContainer />
       </Container>
     </>
