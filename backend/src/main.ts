@@ -14,6 +14,14 @@ async function bootstrap() {
     }),
   );
 
+  // CORS Config
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Access-Control-Allow-Origin',
+    credentials: true,
+  });
+
   await app.listen(5000);
 }
 
