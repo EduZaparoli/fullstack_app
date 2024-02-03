@@ -19,7 +19,7 @@ const Home = () => {
     try {
       await api.getAuthorizationToken(first_name, last_name, email, password)
       router.push('/dashboard', { scroll: false })
-    }catch(error) {
+    } catch (error) {
       console.log(error)
     }
   }
@@ -28,7 +28,7 @@ const Home = () => {
     <>
       <Container align='center' justifyContent='center'>
         <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
-          <LoginContainer onContinue={onContinue} firstName={first_name} lastName={last_name} email={email} password={password} onFirstNameChange={setFirstName} onLastNameChange={setLastName} onEmail={setEmail} onPassword={setPassword}/>
+          <LoginContainer onContinue={onContinue} firstName={first_name} lastName={last_name} email={email} password={password} onFirstNameChange={setFirstName} onLastNameChange={setLastName} onEmail={setEmail} onPassword={setPassword} />
         </Flex>
       </Container>
     </>
