@@ -18,7 +18,7 @@ const Home = () => {
   const onContinue = async () => {
     try {
       await fetchAccessToken(email, password)
-      router.push('/dashboard')
+      router.push('invest/dashboard')
     } catch (error) {
       console.log(error)
     }

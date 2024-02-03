@@ -1,7 +1,7 @@
 "use client"
 import { Box, Button, SkeletonCircle, SkeletonText, Stack } from "@chakra-ui/react";
-import { Container } from "../components/Container";
-import { AuthStore } from "../stores/AuthStore";
+import { Container } from "../../components/Container";
+import { AuthStore } from "../../stores/AuthStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
       </Box>
 
       <Box alignItems={'center'} justifyContent={'center'} display={'flex'} padding={10}>
-        <Button colorScheme='blue' variant='solid' size={'lg'} onClick={userLogout}>Sair</Button>
+        <Button colorScheme='teal' variant='solid' size={'lg'} onClick={userLogout}>Sair</Button>
       </Box>
     </Container>
   );
