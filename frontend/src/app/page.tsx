@@ -5,8 +5,11 @@ import { LoginContainer } from './components/LoginContainer';
 import { useState } from 'react';
 import { api } from './service/APIService';
 import { useRouter } from 'next/navigation';
+import { AuthStore } from './stores/AuthStore';
 
 const Home = () => {
+
+  const { fetchAccessToken } = new AuthStore()
 
   const router = useRouter()
 
@@ -16,12 +19,7 @@ const Home = () => {
   const [password, setPassword] = useState('')
 
   const onContinue = async () => {
-    try {
-      await api.getAuthorizationToken(first_name, last_name, email, password)
-      router.push('/dashboard', { scroll: false })
-    } catch (error) {
-      console.log(error)
-    }
+    fetchAccessToken(first_name, last_name, email, password)
   }
 
   return (
