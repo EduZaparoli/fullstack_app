@@ -31,14 +31,12 @@ export class AuthStore {
     }
 
     public fetchAccessToken = async (
-        first_name: string,
-        last_name: string,
         email: string,
         password: string
     ): Promise<void> => {
 
         try {
-            const token = await api.getAuthorizationToken(first_name, last_name, email, password)
+            const token = await api.getAuthorizationToken(email, password)
             this.setToken(token.access_token)
         } catch (error) {
             console.log(error)

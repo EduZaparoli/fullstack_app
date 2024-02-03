@@ -12,14 +12,12 @@ const Home = () => {
 
   const router = useRouter()
 
-  const [first_name, setFirstName] = useState('')
-  const [last_name, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const onContinue = async () => {
     try {
-      await fetchAccessToken(first_name, last_name, email, password)
+      await fetchAccessToken(email, password)
       router.push('/dashboard')
     } catch (error) {
       console.log(error)
@@ -30,7 +28,7 @@ const Home = () => {
     <>
       <Container align='center' justifyContent='center'>
         <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
-          <LoginContainer onContinue={onContinue} firstName={first_name} lastName={last_name} email={email} password={password} onFirstNameChange={setFirstName} onLastNameChange={setLastName} onEmail={setEmail} onPassword={setPassword} />
+          <LoginContainer onContinue={onContinue} email={email} password={password} onEmail={setEmail} onPassword={setPassword} />
         </Flex>
       </Container>
     </>

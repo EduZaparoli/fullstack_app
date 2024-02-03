@@ -5,3 +5,9 @@ export class User {
   email: string;
   password: string;
 }
+
+export class UserLogin {
+  id: number;
+  email: string;
+  password: string;
+}

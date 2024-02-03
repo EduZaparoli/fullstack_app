@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
-import { User } from '@prisma/client';
 import { UserPayload } from './models/UserPayload';
 import { JwtService } from '@nestjs/jwt';
 import { UserToken } from './models/UserToken';
+import { UserLogin } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-  ) {} //pedir via injeção de dependencia
+  ) { } //pedir via injeção de dependencia
 
-  login(user: User): UserToken {
+  login(user: UserLogin): UserToken {
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
-      first_name: user.first_name,
+      password: user.password,
     };
 
     const jwtToken = this.jwtService.sign(payload);
