@@ -1,7 +1,24 @@
-import { Box, SkeletonCircle, SkeletonText, Stack } from "@chakra-ui/react";
+"use client"
+import { Box, Button, SkeletonCircle, SkeletonText, Stack } from "@chakra-ui/react";
 import { Container } from "../components/Container";
+import { AuthStore } from "../stores/AuthStore";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function Dashboard() {
+const Dashboard = () => {
+  const { isAuthenticated, logout } = new AuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push('/');
+    }
+  }, [isAuthenticated, router]);
+
+  const userLogout = () => {
+    logout();
+    router.push('/')
+  }
 
   return (
     <Container navbar>
@@ -16,6 +33,12 @@ export default function Dashboard() {
           <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
         </Stack>
       </Box>
+
+      <Box alignItems={'center'} justifyContent={'center'} display={'flex'} padding={10}>
+        <Button colorScheme='blue' variant='solid' size={'lg'} onClick={userLogout}>Sair</Button>
+      </Box>
     </Container>
   );
 }
+
+export default Dashboard;

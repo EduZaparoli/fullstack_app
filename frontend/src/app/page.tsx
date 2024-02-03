@@ -3,9 +3,8 @@ import { Flex } from '@chakra-ui/react';
 import { Container } from './components/Container';
 import { LoginContainer } from './components/LoginContainer';
 import { useState } from 'react';
-import { api } from './service/APIService';
-import { useRouter } from 'next/navigation';
 import { AuthStore } from './stores/AuthStore';
+import { useRouter } from 'next/navigation';
 
 const Home = () => {
 
@@ -19,7 +18,12 @@ const Home = () => {
   const [password, setPassword] = useState('')
 
   const onContinue = async () => {
-    fetchAccessToken(first_name, last_name, email, password)
+    try {
+      await fetchAccessToken(first_name, last_name, email, password)
+      router.push('/dashboard')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
