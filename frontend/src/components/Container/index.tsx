@@ -6,13 +6,14 @@ interface IProps {
   align?: string;
   justifyContent?: string;
   navbar?: boolean;
+  avatar?: React.ReactNode;
 }
 
-export const Container = ({ children, align, justifyContent, navbar = false }: IProps) => {
+export const Container = ({ children, align, justifyContent, navbar = false, avatar = false }: IProps) => {
 
   return (
     <>
-      {navbar && <Navbar />}
+      {navbar && <Navbar avatar={avatar} />}
       <Box height={"92vh"} alignItems={align} justifyContent={justifyContent}>
         {children}
       </Box>

@@ -8,7 +8,7 @@ const NotFound = () => {
     const router = useRouter()
 
     const onBack = () => {
-        router.push('/invest/dashboard')
+        router.push('/dashboard')
     }
 
     return (

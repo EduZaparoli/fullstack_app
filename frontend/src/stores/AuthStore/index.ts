@@ -1,4 +1,4 @@
-import { api } from "@/app/service/APIService"
+import { api } from "@/service/APIService"
 import { makeAutoObservable } from "mobx"
 
 export const LOCAL_STORAGE_ACCESS_TOKEN_KEY = "INVEST_APP_TOKEN";
