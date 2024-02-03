@@ -13,11 +13,9 @@ class API {
     return data;
   };
 
-  public getAuthorizationToken = async (first_name: string, last_name: string, email: string, password: string): Promise<types.AccessToken> => {
+  public getAuthorizationToken = async (email: string, password: string): Promise<types.AccessToken> => {
     const { data } = await this.api.post<types.AccessToken>('http://localhost:5000/login',
       {
-        first_name,
-        last_name,
         email,
         password
       },
