@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <>
-            <Container align='center' justifyContent='center' navbar>
+            <Container align='center' justifyContent='flex-end' navbar theme>
                 <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
                     <LoginContainer onContinue={onContinue} email={email} password={password} onEmail={setEmail} onPassword={setPassword} />
                 </Flex>
