@@ -9,16 +9,16 @@ export const TabsComponent = () => {
       <Tabs background={formBackGround} colorScheme='teal' align="center" >
         <Stack gap={10}>
           <TabList>
-            <Tab>Dashboad</Tab>
+            <Tab>Início</Tab>
           </TabList>
           <TabList>
-            <Tab>Actives</Tab>
+            <Tab>Ativos</Tab>
           </TabList>
           <TabList>
-            <Tab>Earnings</Tab>
+            <Tab>Proventos</Tab>
           </TabList>
           <TabList>
-            <Tab>History</Tab>
+            <Tab>Histórico</Tab>
           </TabList>
         </Stack>
       </Tabs>
