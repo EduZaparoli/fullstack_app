@@ -1,44 +1,62 @@
 "use client"
-import { Box, Button, SkeletonCircle, SkeletonText, Stack, useColorModeValue } from "@chakra-ui/react";
-import { Container } from "../../components/Container";
-import { AuthStore } from "../../stores/AuthStore";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Box, Card, Center, Divider, Flex, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { PortfolioValue } from "@/components/PortfolioValue";
+import { ResponsiveLayout } from "@/components/ResponsiveLayout";
+import { ChartComponent } from "@/components/ChartComponent";
 
 const Dashboard = () => {
-  const { isAuthenticated, logout } = new AuthStore();
-  const router = useRouter();
-  const formBackGround = useColorModeValue("gray.100", "gray.700")
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/auth/login');
-    }
-  }, [isAuthenticated, router]);
+  const formBackGround = useColorModeValue("gray.100", "transparent")
 
-  const userLogout = () => {
-    logout();
-    router.push('/auth/login')
-  }
+  const chartData = [
+    ["Actives", "Value"],
+    ["Ações", 17193.11],
+    ["Fundos Imobiliários", 45051.01],
+    ["Tesouro Direto", 13125.60],
+    ["Conta Investimento", 25051.01],
+  ];
+
+  const chartOptions = {
+    pieHole: 0.8,
+    is3D: false,
+    backgroundColor: 'transparent',
+    legend: 'none',
+    pieSliceText: 'none',
+    chartArea: {
+      width: '90%',
+      height: '90%',
+    },
+    slices: {
+      0: { color: 'red' },
+      1: { color: 'green' },
+      2: { color: 'blue' },
+      3: { color: 'orange' },
+    },
+    tooltip: { textStyle: { color: 'teal' }, showColorCode: true, trigger: 'selection' },
+    pieSliceBorderColor: 'none',
+  };
 
   return (
-    <Container navbar avatar>
-      <Box padding={6} boxShadow='lg' bg='white' marginTop={24} marginLeft={14} marginRight={14} background={formBackGround}>
-        <SkeletonCircle size='10' />
-        <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-      </Box>
-      <Box padding={6} boxShadow='lg' bg='white' marginTop={8} marginLeft={14} marginRight={14} background={formBackGround}>
-        <Stack>
-          <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-          <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-          <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-        </Stack>
-      </Box>
-
-      <Box alignItems={'center'} justifyContent={'center'} display={'flex'} padding={10} >
-        <Button colorScheme='teal' variant='solid' size={'lg'} onClick={userLogout}>Sair</Button>
-      </Box>
-    </Container>
+    <ResponsiveLayout>
+      <Grid
+        templateColumns={'repeat(2, 1fr)'}
+        gap={8}
+        justifyItems={'center'}
+        alignItems={'center'}
+        marginLeft={8}
+        marginRight={8}
+        height={'70%'}
+      >
+        <Box width={'100%'} height={'100%'}>
+          <PortfolioValue />
+        </Box>
+        <Flex width={'100%'} height={'100%'} justify={'center'} align={'center'}>
+          <Card bg={formBackGround} width={'100%'} height={'84%'} justify={'center'} align={'center'} marginTop={24} variant={'outline'}>
+            <ChartComponent chartType="PieChart" data={chartData} options={chartOptions} />
+          </Card>
+        </Flex>
+      </Grid>
+    </ResponsiveLayout>
   );
 }
 

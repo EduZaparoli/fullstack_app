@@ -6,7 +6,6 @@ export const LOCAL_STORAGE_ACCESS_TOKEN_KEY = "INVEST_APP_TOKEN";
 export class AuthStore {
     accessToken = '';
 
-
     constructor() {
         makeAutoObservable(this);
     }
