@@ -1,7 +1,6 @@
-import { Box, Button, Center, Flex, Grid, GridItem, Image, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Button, Center, Flex, Grid, GridItem, Image, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { AuthStore } from "../../stores/AuthStore";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { TabsComponent } from "@/components/TabsComponent";
 
@@ -16,11 +15,9 @@ export const ResponsiveLayout = ({ children }: IProps) => {
     const formBackGround = useColorModeValue("gray.100", "gray.600")
     const { colorMode, toggleColorMode } = useColorMode()
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            router.push('/auth/login');
-        }
-    }, [isAuthenticated, router]);
+    if (!isAuthenticated) {
+        router.push('/auth/login');
+    }
 
     const userLogout = () => {
         logout();
