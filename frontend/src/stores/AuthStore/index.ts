@@ -1,33 +1,8 @@
 import { api } from "@/service/APIService"
-import { makeAutoObservable } from "mobx"
 
-export const LOCAL_STORAGE_ACCESS_TOKEN_KEY = "INVEST_APP_TOKEN";
+export const COOKIE_ACCESS_TOKEN_KEY = "INVEST_APP_TOKEN";
 
 export class AuthStore {
-    accessToken = '';
-
-    constructor() {
-        makeAutoObservable(this);
-    }
-
-    public get isAuthenticated(): boolean {
-        return !!this.token();
-    }
-
-    public token(): string | null {
-        const access_token = this.accessToken;
-        if (access_token) {
-            return access_token;
-        }
-
-        const localStorageToken = localStorage.getItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY)
-        if (localStorageToken) {
-            this.accessToken = localStorageToken;
-            return localStorageToken;
-        }
-
-        return null
-    }
 
     public fetchAccessToken = async (
         email: string,
@@ -36,22 +11,41 @@ export class AuthStore {
 
         try {
             const token = await api.getAuthorizationToken(email, password)
-            this.setToken(token.access_token)
+            this.setCookie(COOKIE_ACCESS_TOKEN_KEY, token.access_token)
         } catch (error) {
             console.log(error)
         }
     }
 
+    public setCookie(cname: string, cvalue: string) {
+        document.cookie = cname + "=" + cvalue + ";" + ";path=/";
+    }
+
+    public getCookie(cname: string) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    public get isAuthenticated(): boolean {
+        let user = this.getCookie(COOKIE_ACCESS_TOKEN_KEY);
+        if (user != "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public logout = (): void => {
-        localStorage.removeItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-    }
-
-    public setLocalStorageToken = (): void => {
-        localStorage.setItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY, this.accessToken);
-    }
-
-    public setToken = (token: string): void => {
-        this.accessToken = token;
-        this.setLocalStorageToken()
+        this.setCookie(COOKIE_ACCESS_TOKEN_KEY, '');
     }
 }
