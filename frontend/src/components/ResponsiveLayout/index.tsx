@@ -6,10 +6,10 @@ import { TabsComponent } from "@/components/TabsComponent";
 
 interface IProps {
     children: React.ReactNode;
+    page: number;
 }
 
-export const ResponsiveLayout = ({ children }: IProps) => {
-
+export const ResponsiveLayout = ({ children, page }: IProps) => {
     const { isAuthenticated, logout } = new AuthStore();
     const router = useRouter();
     const formBackGround = useColorModeValue("gray.100", "gray.600")
@@ -39,7 +39,7 @@ export const ResponsiveLayout = ({ children }: IProps) => {
                     <Flex alignSelf={'center'}>
                         <Image src='https://cdn-icons-png.flaticon.com/128/5564/5564318.png' alt='LOGO' width={12} />
                     </Flex>
-                    <TabsComponent />
+                    <TabsComponent page={page} />
                 </Stack>
                 <Center paddingBottom={20}>
                     <Stack align={'center'} gap={12}>
