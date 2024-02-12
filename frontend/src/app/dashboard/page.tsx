@@ -1,5 +1,5 @@
 "use client"
-import { Box, Card, Center, Divider, Flex, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { Box, Card, Flex, Grid, useColorModeValue } from "@chakra-ui/react";
 import { PortfolioValue } from "@/components/PortfolioValue";
 import { ResponsiveLayout } from "@/components/ResponsiveLayout";
 import { ChartComponent } from "@/components/ChartComponent";
@@ -37,7 +37,7 @@ const Dashboard = () => {
   };
 
   return (
-    <ResponsiveLayout>
+    <ResponsiveLayout page={0}>
       <Grid
         templateColumns={'repeat(2, 1fr)'}
         gap={8}
